@@ -1,11 +1,11 @@
-class Department{
+abstract class Department{
     //readonly id:string;
     //name:string;
 
     static fiscalYear:number = 2024;
     private employee:string[] = [];
 
-    constructor(private readonly id:string,public name:string){
+    constructor(protected readonly id:string,public name:string){
         //this.id = id;
         //this.name = name;
     }
@@ -14,9 +14,7 @@ class Department{
         console.log(name);
     }
 
-    describe(this:Department){
-        console.log(`Department id ${this.id} name : ${this.name}`)
-    }
+    abstract describe(this:Department) : void;
 
     addEmployee(employ:string){
         this.employee.push(employ)
@@ -43,6 +41,10 @@ class ITDepartment extends Department {
 
     printAdmin(){
         console.log('Admins : ',this.admins)
+    }
+
+    describe(): void {
+        console.log(`Thi is IT department describtion `,this.id)
     }
 
 }
@@ -78,6 +80,10 @@ class TransportDepartment extends Department {
         this.last_reports = text;
     }
 
+    describe(): void {
+        console.log('This is TransportDepartment of ',this.id)
+    }
+
 }
 
 Department.createEmployee('our new employeed');
@@ -89,6 +95,8 @@ IT.addAdmin('jp')
 IT.addEmployee('jp');
 IT.addEmployee('subha')
 
+
+
 IT.printEmployee();
 IT.printAdmin();
 
@@ -98,6 +106,7 @@ transport.mostRecentReport="This is year end report"
 transport.addReport('Something went wront')
 
 transport.printReport();
+transport.describe();
  
 console.log('most recent report ',transport.mostRecentReport)
 

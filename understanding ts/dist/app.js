@@ -8,9 +8,6 @@ class Department {
     static createEmployee(name) {
         console.log(name);
     }
-    describe() {
-        console.log(`Department id ${this.id} name : ${this.name}`);
-    }
     addEmployee(employ) {
         this.employee.push(employ);
     }
@@ -29,6 +26,9 @@ class ITDepartment extends Department {
     }
     printAdmin() {
         console.log('Admins : ', this.admins);
+    }
+    describe() {
+        console.log(`Thi is IT department describtion `, this.id);
     }
 }
 class TransportDepartment extends Department {
@@ -54,6 +54,9 @@ class TransportDepartment extends Department {
         this.reports.push(text);
         this.last_reports = text;
     }
+    describe() {
+        console.log('This is TransportDepartment of ', this.id);
+    }
 }
 Department.createEmployee('our new employeed');
 console.log('fiscal year : ', Department.fiscalYear);
@@ -68,6 +71,7 @@ const transport = new TransportDepartment("D2", []);
 transport.mostRecentReport = "This is year end report";
 transport.addReport('Something went wront');
 transport.printReport();
+transport.describe();
 console.log('most recent report ', transport.mostRecentReport);
 console.log(IT);
 //# sourceMappingURL=app.js.map
