@@ -53,15 +53,25 @@ class ITDepartment extends Department {
 class TransportDepartment extends Department {
     reports:string[];
     private last_reports:string;
+    private static instance:TransportDepartment;
+
 
     get mostRecentReport() {
         if(this.last_reports)
         return this.last_reports;
     }
-    constructor(id:string,report:string[]){
+    private constructor(id:string,report:string[]){
         super(id,'Transport')
         this.reports = report;
         this.last_reports = report[0];
+    }
+
+    static getInstance(){
+        if(this.instance){
+            return this.instance
+        }
+        this.instance = new TransportDepartment('D2',[]);
+        return this.instance;
     }
 
     set mostRecentReport(value){
@@ -101,7 +111,7 @@ IT.printEmployee();
 IT.printAdmin();
 
 
-const transport = new TransportDepartment("D2",[])
+const transport = TransportDepartment.getInstance();
 transport.mostRecentReport="This is year end report"
 transport.addReport('Something went wront')
 
@@ -114,6 +124,13 @@ console.log('most recent report ',transport.mostRecentReport)
 
 // accCopy.describe();
  console.log(IT)
+
+
+ const transport2 = TransportDepartment.getInstance();
+ transport.printReport();
+transport.describe();
+
+console.log("Transport obj is same :  ",transport === transport2)
 
 
 

@@ -41,6 +41,13 @@ class TransportDepartment extends Department {
         this.reports = report;
         this.last_reports = report[0];
     }
+    static getInstance() {
+        if (this.instance) {
+            return this.instance;
+        }
+        this.instance = new TransportDepartment('D2', []);
+        return this.instance;
+    }
     set mostRecentReport(value) {
         if (!value) {
             throw new Error('Please enter valid input');
@@ -67,11 +74,15 @@ IT.addEmployee('jp');
 IT.addEmployee('subha');
 IT.printEmployee();
 IT.printAdmin();
-const transport = new TransportDepartment("D2", []);
+const transport = TransportDepartment.getInstance();
 transport.mostRecentReport = "This is year end report";
 transport.addReport('Something went wront');
 transport.printReport();
 transport.describe();
 console.log('most recent report ', transport.mostRecentReport);
 console.log(IT);
+const transport2 = TransportDepartment.getInstance();
+transport.printReport();
+transport.describe();
+console.log("Transport obj is same :  ", transport === transport2);
 //# sourceMappingURL=app.js.map
